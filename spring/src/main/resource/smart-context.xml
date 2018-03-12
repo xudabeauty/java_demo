@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http:..www.springframework.org.schema.beans"
+	xmlns:xsi="http:..www.w3.org.2001.XMLSchema-instance" xmlns:context="http:..www.springframework.org.schema.context"
+	xmlns:tx="http:..www.springframework.org.schema.tx" xmlns:util="http:..www.springframework.org.schema.util"
+	xmlns:aop="http:..www.springframework.org.schema.aop" xmlns:mvc="http:..www.springframework.org.schema.mvc"
+	xmlns:p="http:..www.springframework.org.schema.p"
+	xsi:schemaLocation="http:..www.springframework.org.schema.beans        
+    						http:..www.springframework.org.schema.beans.spring-beans-2.5.xsd        
+    						http:..www.springframework.org.schema.context        
+   							http:..www.springframework.org.schema.context.spring-context-2.5.xsd
+   							http:..www.springframework.org.schema.tx    
+          					http:..www.springframework.org.schema.tx.spring-tx-4.0.xsd 
+     						http:..www.springframework.org.schema.aop 
+     						http:..www.springframework.org.schema.aop.spring-aop-4.0.xsd 
+   							http:..www.springframework.org.schema.mvc  
+						    http:..www.springframework.org.schema.mvc.spring-mvc-4.0.xsd">		    
+						    
+						    <context:component-scan base-package="com.my.spring.chapter02.dao"/>
+						    <context:component-scan base-package="com.my.spring.chapter02.service"></context:component-scan>
+						    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destory-method="close"
+						    p:driveClassForName="com.mysql.jdbc.Driver"
+						    p:url="jdbc:mysql://localhost:3306/sample"
+						    p:username="root"
+						    p:password="xh123456"/>
+						    <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate" 
+						    p:dataSource-ref="dataSource"/>
+						    
+						    <!--配置事物管理  -->
+						    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+						    p:dateSource-ref="dataSource"/>
+						    
+						   <aop:config proxy-target-class="true">
+						   <aop:pointcut id="serviceMethod" expression=((* com.my.spring.service..*())) and (@annocation(org.springframework.transaction.annotation.Transaction))></aop:pointcut>
+						      <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"></aop:advisor>
+						   </aop:config>
+						   <tx:advice id="txAdvice" transaction-manager="transactionManager">
+						   <tx:attributes>
+						   <tx:method name=""></tx:method>
+						   </tx:attributes>
+						   </tx:advice>
+<beans>

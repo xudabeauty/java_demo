@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans        
+    						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd        
+    						http://www.springframework.org/schema/context        
+   							http://www.springframework.org/schema/context/spring-context-2.5.xsd
+   							http://www.springframework.org/schema/tx    
+          					http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+     						http://www.springframework.org/schema/aop 
+     						http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+   							http://www.springframework.org/schema/mvc  
+						    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+						    <bean id="car1" class="com.my.spring.chapter05.Car">
+						    <property name="brand"><value>红旗</value></property>
+						    <property name="color"><value>black</value></property>
+						    <property name="maxSpeed"><value>200</value></property>
+						    </bean>
+						    <bean id="car2" class="com.my.spring.chapter05.Car">
+						    <constructor-arg index="0"><value>宝马</value></constructor-arg>
+						    <constructor-arg index="1"><value>red</value></constructor-arg>
+						    <constructor-arg index="2"><value>2000</value></constructor-arg>
+						    </bean>
+						    <bean id="carFacory" class="com.my.spring.chapter05.CarFactory"></bean>
+						    <bean id="car3" factory-bean="carFactory" factory-method="createCar">
+						    </bean>
+						    <bean id="boss" class="com.my.spring.chapter05.Boss">
+						    <list>
+						    <value>看报纸</value>
+						    <value>赛车</value>
+						    <value>高尔夫</value>
+						    </list>
+						    <map>
+						    <entry>
+						    <key><value>AM</value></key>
+						    <value>会见客户</value>
+						    </entry>
+						    <entry>
+						    <key><value>PM</value></key>
+						    <value>公司内部会议</value>
+						    </entry>
+						    </map>
+						    
+						    </bean>
+
+</beans>
